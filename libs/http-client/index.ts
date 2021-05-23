@@ -9,6 +9,10 @@ type Config = AxiosRequestConfig & {
 export const createHttpClient = (baseConfig: Config) => {
   const http = axios.create({
     ...baseConfig,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json',
+    },
   });
 
   const request = <T>(config: AxiosRequestConfig): Promise<T> => {
@@ -21,7 +25,6 @@ export const createHttpClient = (baseConfig: Config) => {
       .request<T>(config)
       .then((res) => res.data)
       .catch((err) => {
-        console.log(err);
         if (err?.response?.status === 404) {
           throw new NotFoundException(err.response.data);
         }
