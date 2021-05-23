@@ -11,9 +11,8 @@ export const createSdk = (config: Config) => {
     baseURL: config.url,
   });
 
-  const getAccountBalance: TransController['findOne'] = (params) => {
-    console.log('CHEGOU AQUI CARAIO', params);
-    return http.get('', params);
+  const getAccountBalance: TransController['getAccountBalance'] = async (id) => {
+    return http.get(id);
   };
 
   return {

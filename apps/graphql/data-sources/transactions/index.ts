@@ -17,10 +17,8 @@ export class Transactions extends DataSource<Ctx> {
   async getAccountBalance(id: string) {
     const trans = await this.sdk.getAccountBalance(id);
     return {
-      trans: {
-        ...trans,
-        id: String(trans.id),
-      },
+      ...trans,
+      id: String(trans.id),
     };
   }
 }

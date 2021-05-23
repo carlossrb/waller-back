@@ -1,5 +1,5 @@
 import { AccountEntity as Account } from '.';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
 
 export enum Operation {
   DEPOSIT = 'DEPOSIT',
@@ -31,7 +31,7 @@ export class TransactionEntity {
   amount: number;
 
   @Column('float')
-  taxes: number;
+  yieldRate: number;
 
   @CreateDateColumn()
   createdAt: Date;

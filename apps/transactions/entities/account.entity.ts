@@ -22,7 +22,16 @@ export class AccountEntity {
   firstDeposit: number;
 
   @Column('float')
-  firstTax: number;
+  accountTotal: number;
+
+  @Column('float')
+  totalWithdrawn: number;
+
+  @Column('float')
+  accountTotalNoYieldRate: number;
+
+  @Column('float')
+  monthlyFirstYieldRate: number;
 
   @CreateDateColumn()
   createdAt: Date;

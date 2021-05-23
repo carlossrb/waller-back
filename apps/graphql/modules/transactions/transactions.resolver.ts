@@ -1,13 +1,12 @@
-import { Resolver, Query, Args, Int, Context, Root, ResolveField, InputType, Field, ID } from '@nestjs/graphql';
+import { Resolver, Query, Args, Context } from '@nestjs/graphql';
 import { Ctx } from '../../context';
-import { Transaction } from './transactions.types';
+import { Account } from './transactions.types';
 
 @Resolver()
 export class TransResolver {
-  @Query(() => Transaction)
-  async transactions(@Args('id') id: string, @Context() ctx: Ctx): Promise<{ trans: Transaction }> {
-    const trans = await ctx.dataSources.trans.getAccountBalance(id);
-
-    return trans;
+  @Query(() => Account)
+  async getAccountBalance(@Args('id') id: string, @Context() ctx: Ctx): Promise<Account> {
+    const acc = await ctx.dataSources.trans.getAccountBalance(id);
+    return acc;
   }
 }
