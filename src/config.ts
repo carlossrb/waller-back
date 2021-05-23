@@ -4,4 +4,5 @@ export const config = {
   PG_USERNAME: 'carlosmagno',
   PG_PASSWORD: 'Stratovarius',
   PG_DATABASE: 'waller',
+  TRANSACTIONS_SERVICE_URL: 'http://localhost:4000/transactions',
 };

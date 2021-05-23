@@ -1,4 +1,4 @@
-import { AccountEntity as Account } from 'src/account/entities';
+import { AccountEntity as Account } from '.';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 
 export enum Operation {
@@ -35,9 +35,6 @@ export class TransactionEntity {
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToOne(() => Account, (acc) => acc.transactions)
   account: Account;

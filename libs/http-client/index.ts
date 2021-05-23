@@ -21,6 +21,7 @@ export const createHttpClient = (baseConfig: Config) => {
       .request<T>(config)
       .then((res) => res.data)
       .catch((err) => {
+        console.log(err);
         if (err?.response?.status === 404) {
           throw new NotFoundException(err.response.data);
         }
