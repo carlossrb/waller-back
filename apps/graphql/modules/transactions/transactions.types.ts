@@ -67,15 +67,6 @@ export class Account {
   totalWithdrawn!: number;
 
   @Field()
-  accountTotalNoYieldRate!: number;
-
-  @Field()
-  monthlyFirstYieldRate!: number;
-
-  @Field()
-  firstDeposit!: number;
-
-  @Field()
   createdAt!: Date;
 
   @Field({ nullable: true })

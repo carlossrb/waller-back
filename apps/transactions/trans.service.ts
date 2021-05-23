@@ -43,25 +43,28 @@ export class TransService {
       throw new NotFoundException('Account not found');
     }
 
-    //valor total sem taxas
-    const accountTotalNoYieldRate = acc.firstDeposit + acc.transactions.reduce((sum, val) => sum + val.amount, 0);
-
-    //valor inicial de deposito
-    let accountTotal = this.getAccountTotalWithYieldRate(
-      acc.operationDate,
-      acc.firstDeposit,
-      acc.monthlyFirstYieldRate / 30
-    );
-
-    //valor das transações (recebido)
-    accountTotal += acc.transactions
-      .filter((val) => val.status == 'DEPOSIT')
-      .reduce((sum, val) => sum + this.getAccountTotalWithYieldRate(val.operationDate, val.amount, val.yieldRate), 0);
-
     //Valor total retirado da conta
     const totalWithdrawn = acc.transactions
       .filter((val) => val.status !== 'DEPOSIT')
       .reduce((sum, val) => sum + val.amount, 0);
+
+    //caso haja retirada, o valor total retirado é parcelado e descontado de cada deposito feito
+    const total = acc.transactions.filter((val) => val.status == 'DEPOSIT').length;
+    const parcel = totalWithdrawn / (total > 0 ? total : 1);
+
+    //valor total sem taxas
+    const accountTotalNoYieldRate = acc.transactions
+      .filter((val) => val.status == 'DEPOSIT')
+      .reduce((sum, val) => sum + val.amount, 0);
+
+    //valor das transações (recebido)
+    const accountTotal = acc.transactions
+      .filter((val) => val.status == 'DEPOSIT')
+      .reduce(
+        (sum, val) =>
+          sum + this.getAccountTotalWithYieldRate(val.operationDate, val.amount - parcel, val.yieldRate / 30),
+        0
+      );
 
     await this.accountRepo.update(acc.id, { accountTotal, accountTotalNoYieldRate, totalWithdrawn });
 

@@ -19,9 +19,6 @@ export class AccountEntity {
   operationDate!: string;
 
   @Column('float')
-  firstDeposit: number;
-
-  @Column('float')
   accountTotal: number;
 
   @Column('float')
@@ -29,9 +26,6 @@ export class AccountEntity {
 
   @Column('float')
   accountTotalNoYieldRate: number;
-
-  @Column('float')
-  monthlyFirstYieldRate: number;
 
   @CreateDateColumn()
   createdAt: Date;

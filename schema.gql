@@ -10,9 +10,6 @@ type Account {
   operationDate: String!
   accountTotal: Float!
   totalWithdrawn: Float!
-  accountTotalNoYieldRate: Float!
-  monthlyFirstYieldRate: Float!
-  firstDeposit: Float!
   createdAt: DateTime!
   updatedAt: DateTime
 }
