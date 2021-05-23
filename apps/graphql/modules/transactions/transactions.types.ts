@@ -64,6 +64,9 @@ export class Account {
   accountTotal!: number;
 
   @Field()
+  accountTotalNoYieldRate!: number;
+
+  @Field()
   totalWithdrawn!: number;
 
   @Field()

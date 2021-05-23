@@ -28,7 +28,7 @@ export class TransService {
 
   /**
    * Obtem os valores de entrada e saída da conta
-   * @param id
+   * @param id id da conta
    * @returns
    */
   async getBalance(id: string): Promise<AccountEntity> {

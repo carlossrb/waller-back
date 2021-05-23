@@ -9,6 +9,7 @@ type Account {
   accountNumber: String!
   operationDate: String!
   accountTotal: Float!
+  accountTotalNoYieldRate: Float!
   totalWithdrawn: Float!
   createdAt: DateTime!
   updatedAt: DateTime
