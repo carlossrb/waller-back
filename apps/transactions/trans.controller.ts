@@ -1,7 +1,8 @@
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TransactionEntity, TransactionLogEntity } from './entities';
+import { TransactionEntity, TransactionLogEntity, AccountEntity } from './entities';
+import { TransService } from './trans.service';
 
 @Controller()
 export class TransController {
@@ -9,17 +10,21 @@ export class TransController {
     @InjectRepository(TransactionEntity)
     private readonly transRepo: Repository<TransactionEntity>,
 
+    @InjectRepository(AccountEntity)
+    private readonly accountRepo: Repository<AccountEntity>,
+
     @InjectRepository(TransactionLogEntity)
-    private readonly logRepo: Repository<TransactionLogEntity>
+    private readonly logRepo: Repository<TransactionLogEntity>,
+
+    private readonly transService: TransService
   ) {}
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<TransactionEntity> {
-    console.log('AGORA PASSOU HEHE', id);
-    const trans = await this.transRepo.findOne(Number(id));
-    if (!trans) {
+  async getAccountBalance(@Param('id') id: string): Promise<AccountEntity> {
+    const acc = await this.transService.getBalance(id);
+    if (!acc) {
       throw new NotFoundException('Transaction not found');
     }
-    return trans;
+    return acc;
   }
 }
