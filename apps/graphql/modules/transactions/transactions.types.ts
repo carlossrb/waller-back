@@ -42,3 +42,42 @@ export class Transaction {
   @Field()
   operationDate!: string;
 }
+
+@ObjectType()
+export class Account {
+  @Field(() => ID)
+  id!: string;
+
+  @Field()
+  userEmail!: string;
+
+  @Field()
+  userName!: string;
+
+  @Field()
+  accountNumber!: string;
+
+  @Field()
+  operationDate!: string;
+
+  @Field()
+  accountTotal!: number;
+
+  @Field()
+  totalWithdrawn!: number;
+
+  @Field()
+  accountTotalNoYieldRate!: number;
+
+  @Field()
+  monthlyFirstYieldRate!: number;
+
+  @Field()
+  firstDeposit!: number;
+
+  @Field()
+  createdAt!: Date;
+
+  @Field({ nullable: true })
+  updatedAt?: Date;
+}
