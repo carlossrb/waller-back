@@ -15,8 +15,23 @@ export const createSdk = (config: Config) => {
     return http.get(id);
   };
 
+  const makeDeposit: TransController['deposit'] = async (id, body) => {
+    return http.post(`${id}/deposit`, body);
+  };
+
+  const makePayment: TransController['payment'] = async (id, body) => {
+    return http.post(`${id}/payment`, body);
+  };
+
+  const makeWithdrawal: TransController['withdrawal'] = async (id, body) => {
+    return http.post(`${id}/withdrawal`, body);
+  };
+
   return {
     getAccountBalance,
+    makeDeposit,
+    makePayment,
+    makeWithdrawal,
   };
 };
 
