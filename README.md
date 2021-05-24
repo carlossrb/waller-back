@@ -19,7 +19,7 @@ Waller lança mão de algumas tecnologias, aqui sendo as principais delas no bac
 - **GraphQL** - O grapql server é orientado a chamar os endpoints gerados pelo controller. Utilizado aqui dentro do repositório, porém facilmente desacoplado se necessário;
 - **Typeorm** - ORM para facilitar as operações que envolviam a modelagem do banco de dados;
 - **Aws** - Não necessariamente no projeto em si, mas o banco de dados é setado na nuvem para que fique independente da máquina do usuário que for testar;
--  **Eslint, Prettier, Husky, Github Actions** - Tecnologias usadas para melhorar a entrega do código e evitar possíveis bugs commitados na branch principal. 
+-  **Eslint, Prettier, Husky, Github Actions** - Tecnologias usadas para melhorar a entrega do código e evitar possíveis bugs commitados na branch principal antes de um deploy. 
 
 Além dessas, outras tecnologias para desenvolvimento foram utilizadas, não sendo necessário citá-las aqui.
 
@@ -29,7 +29,7 @@ Assim como no front-end, para rodar o projeto, faz-se necessário ter o node v12
 
 Instalando os módulos...
 ```sh
-yarn intall
+yarn install
 ```
 Testar em dev...
 ```sh
@@ -56,3 +56,4 @@ Dentre as diversas limitações, algumas podem ser levantadas para serem posteri
 - Assim como no front também, autorização e autenticação nas requisições. Isso é imprescindível para lançamento fora de testes;
 - Uma possível separação do módulo do graphql em outro repo/projeto para fazer essa intermediação entre o front-back de forma completamente independente;
 - Transformar cada app em um package para poder ser chamado nesse projeto de graphql de forma independente;
+- Continuous delivery para complementar com o CI já feito
