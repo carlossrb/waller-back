@@ -5,7 +5,7 @@ on:
   pull_request:
     branches:
       - main
-name: PR check
+name: PR/push check
 jobs:
   lint:
     name: Lint
