@@ -21,10 +21,10 @@ export class TransService {
   ) {}
 
   private getAccountTotalWithYieldRate = (initialDate: string, initialValue: number, i: number): number => {
-    const dateNow = new Date();
-    const n = differenceInCalendarDays(new Date(initialDate), dateNow);
-
-    return initialValue + Math.pow(1 + i, n);
+    const dateNow = new Date(format(new Date(), 'MM-dd-yyyy'));
+    const init = new Date(initialDate);
+    const n = differenceInCalendarDays(dateNow, init);
+    return initialValue * Math.pow(1 + i, n);
   };
 
   /**
