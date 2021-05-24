@@ -25,7 +25,7 @@ Além dessas, outras tecnologias para desenvolvimento foram utilizadas, não sen
 
 ## Instalação e teste
 
-Assim como no front-end, para rodar o projeto, faz-se necessário ter o node v12 ou superior instalado em sua máquina. Após isso, rode o comando a seguir para iniciar em modo de desenvolvimento: 
+Assim como no front-end, para rodar o projeto, faz-se necessário ter o node v12 ou superior instalado em sua máquina. Após isso, execute os comandos a seguir conforme necessário: 
 
 Instalando os módulos...
 ```sh
