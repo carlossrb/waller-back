@@ -8,7 +8,7 @@ import { differenceInCalendarDays, format } from 'date-fns';
 @Injectable()
 export class TransService {
   //taxa de rendimento mensal
-  private monthlyYieldRate = 0.03;
+  private monthlyYieldRate = 0.003;
   constructor(
     @InjectRepository(TransactionEntity)
     private readonly transRepo: Repository<TransactionEntity>,
