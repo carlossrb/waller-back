@@ -86,6 +86,9 @@ export class TransService {
       throw new NotFoundException('Account not found');
     }
 
+    if (acc.accountTotal < parseFloat(amount.replace(',', '.'))) {
+      throw new NotFoundException('Insufficient funds');
+    }
     const trans = await this.transRepo.save({
       account: acc,
       amount: parseFloat(amount.replace(',', '.')),
@@ -117,6 +120,10 @@ export class TransService {
 
     if (!acc) {
       throw new NotFoundException('Account not found');
+    }
+
+    if (acc.accountTotal < parseFloat(amount.replace(',', '.'))) {
+      throw new NotFoundException('Insufficient funds');
     }
 
     const trans = await this.transRepo.save({
