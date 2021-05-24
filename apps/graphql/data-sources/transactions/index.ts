@@ -5,6 +5,7 @@ import { config } from 'src/config';
 import { Ctx } from '../../context';
 import { createSdk, TransSdk } from 'apps/transactions/sdk';
 
+//TODO: fazer func para convert ids
 export class Transactions extends DataSource<Ctx> {
   sdk!: TransSdk;
 
@@ -15,10 +16,37 @@ export class Transactions extends DataSource<Ctx> {
   }
 
   async getAccountBalance(id: string) {
-    const trans = await this.sdk.getAccountBalance(id);
+    const acc = await this.sdk.getAccountBalance(id);
     return {
-      ...trans,
-      id: String(trans.id),
+      ...acc,
+      id: String(acc.id),
+    };
+  }
+
+  async makeDeposit(input: { id: string; amount: string }) {
+    const { amount, id } = input;
+    const acc = await this.sdk.makeDeposit(id, { amount });
+    return {
+      ...acc,
+      id: String(acc.id),
+    };
+  }
+
+  async makeWithdrawal(input: { id: string; amount: string }) {
+    const { amount, id } = input;
+    const acc = await this.sdk.makeWithdrawal(id, { amount });
+    return {
+      ...acc,
+      id: String(acc.id),
+    };
+  }
+
+  async makePayment(input: { id: string; amount: string; target: string }) {
+    const { amount, id, target } = input;
+    const acc = await this.sdk.makePayment(id, { amount, target });
+    return {
+      ...acc,
+      id: String(acc.id),
     };
   }
 }
