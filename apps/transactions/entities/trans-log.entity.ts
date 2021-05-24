@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
-type TransactionLogOperation = 'deposit' | 'payment' | 'withdraw';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Operation } from './trans.entity';
 
 @Entity()
 export class TransactionLogEntity {
@@ -14,7 +13,7 @@ export class TransactionLogEntity {
   userName: string;
 
   @Column()
-  operation: TransactionLogOperation;
+  operation: Operation;
 
   @Column()
   message: string;
@@ -27,7 +26,4 @@ export class TransactionLogEntity {
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

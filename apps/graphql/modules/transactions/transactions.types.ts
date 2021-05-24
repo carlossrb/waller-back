@@ -19,15 +19,6 @@ export class Transaction {
   status!: Operation;
 
   @Field()
-  userName!: string;
-
-  @Field()
-  userEmail!: string;
-
-  @Field()
-  accountNumber: string;
-
-  @Field()
   amount!: number;
 
   @Field()

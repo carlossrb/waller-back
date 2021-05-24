@@ -13,16 +13,10 @@ export class TransactionEntity {
   id: number;
 
   @Column()
-  userEmail: string;
+  status!: Operation;
 
   @Column()
-  userName: string;
-
-  @Column()
-  accountNumber: string;
-
-  @Column()
-  status: Operation;
+  destinationAccount!: string;
 
   @Column('date')
   operationDate!: string;
