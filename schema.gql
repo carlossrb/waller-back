@@ -11,7 +11,7 @@ type Account {
   accountTotal: Float!
   accountTotalNoYieldRate: Float!
   yields: Float!
-  totalWithdrawn: Float!
+  totalWithdrawal: Float!
   createdAt: DateTime!
   updatedAt: DateTime
 }

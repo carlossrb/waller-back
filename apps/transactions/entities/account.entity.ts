@@ -22,7 +22,7 @@ export class AccountEntity {
   accountTotal: number;
 
   @Column('float')
-  totalWithdrawn: number;
+  totalWithdrawal: number;
 
   @Column('float')
   accountTotalNoYieldRate: number;

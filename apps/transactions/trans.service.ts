@@ -22,8 +22,7 @@ export class TransService {
 
   private getAccountTotalWithYieldRate = (initialDate: string, initialValue: number, i: number): number => {
     const dateNow = new Date(format(new Date(), 'MM-dd-yyyy'));
-    const init = new Date(initialDate);
-    const n = differenceInCalendarDays(dateNow, init);
+    const n = differenceInCalendarDays(dateNow, new Date(initialDate)) - 1;
     return initialValue * Math.pow(1 + i, n);
   };
 
@@ -45,13 +44,13 @@ export class TransService {
     }
 
     //Valor total retirado da conta
-    const totalWithdrawn = acc.transactions
+    const totalWithdrawal = acc.transactions
       .filter((val) => val.status !== Operation.DEPOSIT)
       .reduce((sum, val) => sum + val.amount, 0);
 
-    //caso haja retirada, o valor total retirado é parcelado e descontado de cada deposito feito
+    //caso haja retirada, o valor total retirado é parcelado e descontado de cada deposito feito (diminui o rendimento final de cada deposito)
     const total = acc.transactions.filter((val) => val.status === Operation.DEPOSIT).length;
-    const parcel = totalWithdrawn / (total > 0 ? total : 1);
+    const parcel = totalWithdrawal / (total > 0 ? total : 1);
 
     //valor total sem taxas
     const accountTotalNoYieldRate = acc.transactions
@@ -70,8 +69,8 @@ export class TransService {
     await this.accountRepo.update(acc.id, {
       accountTotal,
       accountTotalNoYieldRate,
-      totalWithdrawn,
-      yields: totalWithdrawn + accountTotal - accountTotalNoYieldRate,
+      totalWithdrawal,
+      yields: totalWithdrawal + accountTotal - accountTotalNoYieldRate,
     });
 
     return (await this.accountRepo.findOne(acc.id))!;
@@ -111,11 +110,11 @@ export class TransService {
       metadata: { amount },
     });
 
-    return (await this.accountRepo.findOne(acc.id))!;
+    return this.getBalance(id);
   }
 
   /**
-   * Realzia um depósito
+   * Realiza um depósito
    * @param id
    * @param amount
    * @returns
@@ -145,7 +144,7 @@ export class TransService {
       metadata: { amount },
     });
 
-    return (await this.accountRepo.findOne(acc.id))!;
+    return this.getBalance(id);
   }
 
   /**
@@ -185,6 +184,6 @@ export class TransService {
       metadata: { amount, destinationAccount: target.replace(/[^\w\s]/gi, '') },
     });
 
-    return (await this.accountRepo.findOne(acc.id))!;
+    return this.getBalance(id);
   }
 }

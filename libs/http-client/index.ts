@@ -2,7 +2,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 import axios, { AxiosRequestConfig } from 'axios';
 
 type Config = AxiosRequestConfig & {
-  type: 'waller-back' | 'external';
+  type: 'waller-back';
   mockResponse?: (config: AxiosRequestConfig) => Record<string, any> | void;
 };
 

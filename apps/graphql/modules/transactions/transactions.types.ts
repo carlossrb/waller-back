@@ -61,7 +61,7 @@ export class Account {
   yields!: number;
 
   @Field()
-  totalWithdrawn!: number;
+  totalWithdrawal!: number;
 
   @Field()
   createdAt!: Date;
