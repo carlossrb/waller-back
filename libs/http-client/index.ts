@@ -9,10 +9,6 @@ type Config = AxiosRequestConfig & {
 export const createHttpClient = (baseConfig: Config) => {
   const http = axios.create({
     ...baseConfig,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Accept: 'application/json',
-    },
   });
 
   const request = <T>(config: AxiosRequestConfig): Promise<T> => {

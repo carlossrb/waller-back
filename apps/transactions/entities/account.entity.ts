@@ -27,6 +27,9 @@ export class AccountEntity {
   @Column('float')
   accountTotalNoYieldRate: number;
 
+  @Column('float')
+  yields: number;
+
   @CreateDateColumn()
   createdAt: Date;
 

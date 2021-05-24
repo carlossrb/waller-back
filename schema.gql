@@ -10,6 +10,7 @@ type Account {
   operationDate: String!
   accountTotal: Float!
   accountTotalNoYieldRate: Float!
+  yields: Float!
   totalWithdrawn: Float!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -24,15 +25,36 @@ type DepositPayload {
   account: Account
 }
 
+type PaymentPayload {
+  account: Account
+}
+
+type WithdrawalPayload {
+  account: Account
+}
+
 type Query {
   getAccountBalance(id: String!): Account!
 }
 
 type Mutation {
-  makeDeposit(input: DespositInput!): DepositPayload!
+  makeDeposit(input: DepositInput!): DepositPayload!
+  makePayment(input: PaymentInput!): PaymentPayload!
+  makeWithdrawal(input: WithdrawalInput!): WithdrawalPayload!
 }
 
-input DespositInput {
+input DepositInput {
+  id: ID!
+  amount: String!
+}
+
+input PaymentInput {
+  id: ID!
+  amount: String!
+  target: String!
+}
+
+input WithdrawalInput {
   id: ID!
   amount: String!
 }

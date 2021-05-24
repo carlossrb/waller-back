@@ -15,7 +15,7 @@ export class TransactionEntity {
   @Column()
   status!: Operation;
 
-  @Column()
+  @Column({ nullable: true })
   destinationAccount!: string;
 
   @Column('date')

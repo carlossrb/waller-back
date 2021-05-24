@@ -67,7 +67,12 @@ export class TransService {
         0
       );
 
-    await this.accountRepo.update(acc.id, { accountTotal, accountTotalNoYieldRate, totalWithdrawn });
+    await this.accountRepo.update(acc.id, {
+      accountTotal,
+      accountTotalNoYieldRate,
+      totalWithdrawn,
+      yields: totalWithdrawn + accountTotal - accountTotalNoYieldRate,
+    });
 
     return (await this.accountRepo.findOne(acc.id))!;
   }
@@ -102,6 +107,7 @@ export class TransService {
       transactionId: trans.id,
       userEmail: acc.userEmail,
       userName: acc.userName,
+      message: `Retirada realizada em ${new Date()}`,
       metadata: { amount },
     });
 
@@ -122,10 +128,6 @@ export class TransService {
       throw new NotFoundException('Account not found');
     }
 
-    if (acc.accountTotal < parseFloat(amount.replace(',', '.'))) {
-      throw new NotFoundException('Insufficient funds');
-    }
-
     const trans = await this.transRepo.save({
       account: acc,
       amount: parseFloat(amount.replace(',', '.')),
@@ -139,6 +141,7 @@ export class TransService {
       transactionId: trans.id,
       userEmail: acc.userEmail,
       userName: acc.userName,
+      message: `Depósito realizado em ${new Date()}`,
       metadata: { amount },
     });
 
@@ -160,6 +163,10 @@ export class TransService {
       throw new NotFoundException('Account not found');
     }
 
+    if (acc.accountTotal < parseFloat(amount.replace(',', '.'))) {
+      throw new NotFoundException('Insufficient funds');
+    }
+
     const trans = await this.transRepo.save({
       account: acc,
       amount: parseFloat(amount.replace(',', '.')),
@@ -174,6 +181,7 @@ export class TransService {
       transactionId: trans.id,
       userEmail: acc.userEmail,
       userName: acc.userName,
+      message: `Pagamento realizado em ${new Date()}`,
       metadata: { amount, destinationAccount: target.replace(/[^\w\s]/gi, '') },
     });
 
