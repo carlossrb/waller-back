@@ -20,7 +20,7 @@ describe('TransService', () => {
     };
 
     jest.useFakeTimers('modern');
-    jest.setSystemTime(new Date('2021-05-24').getTime());
+    jest.setSystemTime(new Date('2021-05-25').getTime());
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
