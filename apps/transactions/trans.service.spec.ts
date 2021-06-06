@@ -104,7 +104,7 @@ describe('TransService', () => {
     expect(saveSpy).toHaveBeenNthCalledWith(1, {
       account: mockAccount(),
       amount: parseFloat('100,0'.replace(',', '.')),
-      operationDate: '05-24-2021',
+      operationDate: '05-25-2021',
       status: Operation.PAYMENT,
       yieldRate: 0.003,
       destinationAccount: '123456',
